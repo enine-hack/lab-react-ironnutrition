@@ -2,7 +2,7 @@ import React from 'react';
 
 class Addfood extends React.Component {
     state = {
-        title: '',
+        name: '',
         calories: 0,
         image: '',
     }
@@ -17,6 +17,7 @@ class Addfood extends React.Component {
         this.setState({
             [name]: value
         })
+        console.log(event.target)
 
     }
 
@@ -24,8 +25,9 @@ class Addfood extends React.Component {
         event.preventDefault()
         this.props.addNewFood(this.state)
 
+        // laisser les cases vides
         this.setState({
-            title: '',
+            name: '',
             calories: 0,
             image: '',
         })
@@ -35,9 +37,9 @@ class Addfood extends React.Component {
     render() {
         return (
             <div>
-                <form onSubmit={this.handleFromSubmit}>
+                <form onSubmit={this.handleFormSubmit}>
                     <label>Title:</label>
-                    <input type="text" name="title" value={this.state.title} onChange={this.handleChange} />
+                    <input type="text" name="name" value={this.state.title} onChange={(event) =>this.handleChange(event)} />
 
                     <label>Calories:</label>
                     <input type="text" name="calories" value={this.state.calories} onChange={this.handleChange}/>

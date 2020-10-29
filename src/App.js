@@ -3,6 +3,7 @@ import './App.css';
 import Foodbox from './FoodBox';
 import foods from './foods.json';
 import Addfood from './Addfood';
+import Search from './Search'
 
 
 class App extends React.Component {
@@ -14,20 +15,32 @@ class App extends React.Component {
 
   addFoodHandler = (newfood) => {
     const foodsCopy = [...this.state.foods]; // copy!
-
+    console.log('newfood=',newfood)
     foodsCopy.push(newfood)
 
     this.setState({
       foods: foodsCopy
-    }
+    
+    })
 
-    )
-
+  }
+  searchHandler = (newsearch) => {
+    console.log('new search = ',newsearch)
+    let foodsCopy = [...this.state.foods];
+    console.log('foods copy 1=  ', foodsCopy)
+    foodsCopy = foodsCopy.filter(el => el["name"].includes(newsearch))
+    console.log('foods copy =  ', foodsCopy)
+    this.setState({
+      foods: foodsCopy
+    
+    })
+    
   }
 
   render () {
     return (
       <div>
+        <Search search={this.searchHandler}/>
         <button onClick={(event) => {
           this.setState({
             showform: !this.state.showform
@@ -43,7 +56,7 @@ class App extends React.Component {
           {this.state.foods.map(food => (
             <div key={food.name}><Foodbox {...food}/></div>
           ))}
-          <Foodbox />
+          
         </div>
       </div>
     );
