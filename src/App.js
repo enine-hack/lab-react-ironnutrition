@@ -10,6 +10,7 @@ class App extends React.Component {
   state = {
     foods: foods,
     showform: false,
+    query:''
 
   }
 
@@ -24,23 +25,17 @@ class App extends React.Component {
     })
 
   }
-  searchHandler = (newsearch) => {
-    console.log('new search = ',newsearch)
-    let foodsCopy = [...this.state.foods];
-    console.log('foods copy 1=  ', foodsCopy)
-    foodsCopy = foodsCopy.filter(el => el["name"].includes(newsearch))
-    console.log('foods copy =  ', foodsCopy)
+  
+  handlerChange = (event) => {
     this.setState({
-      foods: foodsCopy
-    
+       query:event.target.value
     })
-    
-  }
+}
 
   render () {
     return (
       <div>
-        <Search search={this.searchHandler}/>
+        <Search search={this.handlerChange} query={this.state.query}/>
         <button onClick={(event) => {
           this.setState({
             showform: !this.state.showform
@@ -53,7 +48,7 @@ class App extends React.Component {
         
 
         <div className="App">
-          {this.state.foods.map(food => (
+          {this.state.foods.filter(food => food.name.toLowerCase().includes(this.state.query)).map(food => (
             <div key={food.name}><Foodbox {...food}/></div>
           ))}
           

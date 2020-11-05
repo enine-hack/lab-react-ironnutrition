@@ -17,6 +17,7 @@ class Addfood extends React.Component {
         this.setState({
             [name]: value
         })
+        console.log('title after:   ', this.state.name)
         console.log(event.target)
 
     }
@@ -39,7 +40,7 @@ class Addfood extends React.Component {
             <div>
                 <form onSubmit={this.handleFormSubmit}>
                     <label>Title:</label>
-                    <input type="text" name="name" value={this.state.title} onChange={(event) =>this.handleChange(event)} />
+                    <input type="text" name="name" value={this.state.name} onChange={(event) =>this.handleChange(event)} />
 
                     <label>Calories:</label>
                     <input type="text" name="calories" value={this.state.calories} onChange={this.handleChange}/>
